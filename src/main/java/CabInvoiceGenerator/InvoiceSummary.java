@@ -7,9 +7,9 @@ public class InvoiceSummary {
 	private int rides;
 
 	public InvoiceSummary(int rides, double totalFare, double averageFare) {
-		this.fare = fare;
+		this.fare = totalFare;
 		this.rides = rides;
-		this.averageFare = fare/totalFare;
+		this.averageFare = totalFare/totalFare;
 	}
 
 	@Override
@@ -25,9 +25,8 @@ public class InvoiceSummary {
 			return false;
 		if (Double.doubleToLongBits(fare) != Double.doubleToLongBits(other.fare))
 			return false;
-		if (Double.doubleToLongBits(rides) != Double.doubleToLongBits(other.rides))
+		if (rides != other.rides)
 			return false;
 		return true;
 	}
-	
 }
