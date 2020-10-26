@@ -9,10 +9,14 @@ import org.junit.Before;
 
 public class InvoiceServiceTest {
 	InvoiceService invoiceService = null;
+	ArrayList<Ride> rideList = null;
 
 	@Before
 	public void loadData() {
 		invoiceService = new InvoiceService();
+		rideList = new ArrayList<>();
+		rideList.add(new Ride(2.0, 5));
+		rideList.add(new Ride(0.1, 1));
 	}
 
 	@Test
@@ -33,9 +37,6 @@ public class InvoiceServiceTest {
 
 	@Test
 	public void givenMultipleRides_shouldReturnInvoiceSummary() {
-		ArrayList<Ride> rideList = new ArrayList<>();
-		rideList.add(new Ride(2.0, 5));
-		rideList.add(new Ride(0.1, 1));
 		InvoiceSummary summary = invoiceService.calculateFare(rideList);
 		InvoiceSummary expectedSummary = new InvoiceSummary(2, 30, 15);
 		Assert.assertEquals(expectedSummary, summary);
@@ -44,9 +45,6 @@ public class InvoiceServiceTest {
 	@Test
 	public void givenUserIdAndRide_shouldReturnInvoiceSummary() {
 		String userId = "a@b.com";
-		ArrayList<Ride> rideList = new ArrayList<>();
-		rideList.add(new Ride(2.0, 5));
-		rideList.add(new Ride(0.1, 1));
 		invoiceService.addRides(userId, rideList);
 		InvoiceSummary summary = invoiceService.getInvoiceSummary(userId);
 		InvoiceSummary expectedSummary = new InvoiceSummary(2, 30, 15);
